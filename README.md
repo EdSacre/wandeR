@@ -7,7 +7,7 @@ About the wandeR package
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Installation
+## Installation
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
