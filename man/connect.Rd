@@ -4,13 +4,15 @@
 \alias{connect}
 \title{connect}
 \usage{
-connect()
+connect(habitats, destinations, maxdist)
 }
 \arguments{
 \item{habitats}{A raster of species habitats or known locations.}
 
 \item{destinations}{A raster of the land or seascape. Values of 0 or NA are considered "barriers".
-Values greater than 0 are considered valid location to travel through.}
+Values greater than 0 are considered valid locations to travel through.}
+
+\item{maxdist}{The maximum dispersal distance of the species in map units.}
 }
 \value{
 A spatial raster of connectivity.
