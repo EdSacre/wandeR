@@ -44,3 +44,5 @@ connect <- function(habitats, destinations, maxdist) {
   outcon[is.na(outcon) == F] <- base
   return(outcon)
 }
+
+
