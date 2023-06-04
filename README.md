@@ -1,7 +1,7 @@
 # wandeR
 ## About the package
 
-![Alt text](images/connect.JPG)
+![Alt text](inst/images/connect.JPG)
 
 About the wandeR package
 

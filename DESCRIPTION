@@ -19,4 +19,7 @@ Depends:
 Imports:
     raster (>= 3.6.20),
     gdistance (>= 1.6.2)
-    
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

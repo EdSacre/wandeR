@@ -40,9 +40,9 @@ connect <- function(habitats, destinations, maxdist) {
     base <- base+cd
   }
 
-  outcon <- destinations * 0
-  outcon[is.na(outcon) == F] <- base
-  return(outcon)
+  out <- destinations * 0
+  out[is.na(out) == F] <- base
+  return(out)
 }
 
 
