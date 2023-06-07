@@ -4,7 +4,7 @@
 \alias{connect}
 \title{connect}
 \usage{
-connect(habitats, destinations, maxdist)
+connect(habitats, destinations, maxdist, nthreads = 1)
 }
 \arguments{
 \item{habitats}{A raster of species habitats or known locations.}
@@ -13,6 +13,8 @@ connect(habitats, destinations, maxdist)
 Values greater than 0 are considered valid locations to travel through.}
 
 \item{maxdist}{The maximum dispersal distance of the species in map units.}
+
+\item{nthreads}{Specify the number of threads to use.}
 }
 \value{
 A spatial raster of connectivity.

@@ -2,6 +2,8 @@
 
 export(connect)
 export(wander_data)
+importFrom(foreach,"%dopar%")
 importFrom(gdistance,"costDistance")
 importFrom(gdistance,"transition")
 importFrom(raster,"raster")
+importFrom(utils,"globalVariables")
