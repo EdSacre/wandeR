@@ -1,5 +1,5 @@
 ---
-title: "wandeR package"
+title: "wandeR"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{wandeR}
@@ -14,14 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Install the package
-```{r}
-#install_github("Edsacre/WandeR")
-```
-
+## Load packages
 ```{r setup}
 library(wandeR)
+library(raster)
 library(devtools)
+library(terra)
 ```
 
 ## Import some testing dataset
@@ -29,9 +27,16 @@ The coral raster shows coral habitat around Zanzibar and Pemba Island.
 The zanzibar raster show all ocean areas around Zanzibar.
 We want to model the connectivity of corals in the area, assuming the can only
 disperse through these ocean areas.
+```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4, fig.align = 'center'}
+coral <- wander_data("coral")
+zanzibar <- wander_data("zanzibar")
+terra::plot(stack(coral, zanzibar), axes = FALSE)
+```
+
+## Examine dispersal kernel options
+
 ```{r}
-coral <- wandeR::wander_data("coral")
-zanzibar <- wandeR::wander_data("zanzibar")
-plot(stack(coral, zanzibar))
+coral.connect <- connect(coral, zanzibar, maxdist = 30000)
+plot(coral.connect)
 ```
 
