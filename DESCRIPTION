@@ -3,8 +3,8 @@ Type: Package
 Title: Spatial Tools for Connectivity and Density Mapping
 Version: 0.1.0
 Author: Edmond Sacre
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: This package provides function for connectivity modelling.
+Maintainer: Edmond Sacre <edmond.sacre@slu.se>
+Description: Provides functions for connectivity modelling.
     The connectivity models are based on graph theory, and model the movement
     of species through space according to a dispersal kernel, least cost paths,
     and spatial barriers (e.g. land for marine species, or roads for terrestrial
