@@ -4,7 +4,7 @@
 \alias{connect}
 \title{connect}
 \usage{
-connect(habitats, destinations, maxdist, nthreads = 1)
+connect(habitats, destinations, maxdist, t = 0.2, nthreads = 1)
 }
 \arguments{
 \item{habitats}{A raster of species habitats or known locations.}
@@ -13,6 +13,9 @@ connect(habitats, destinations, maxdist, nthreads = 1)
 Values greater than 0 are considered valid locations to travel through.}
 
 \item{maxdist}{The maximum dispersal distance of the species in map units.}
+
+\item{t}{Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
+with values closer to 0 giving a steeper decline. Values above 1 give an essentially linear distribution. Default value is 0.2.}
 
 \item{nthreads}{Specify the number of threads to use.}
 }

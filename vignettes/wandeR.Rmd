@@ -18,8 +18,6 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(wandeR)
 library(raster)
-library(devtools)
-library(terra)
 ```
 
 ## Import some testing dataset
@@ -30,13 +28,31 @@ disperse through these ocean areas.
 ```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4, fig.align = 'center'}
 coral <- wander_data("coral")
 zanzibar <- wander_data("zanzibar")
-terra::plot(stack(coral, zanzibar), axes = FALSE)
+plot(stack(coral, zanzibar), axes = FALSE)
 ```
 
 ## Examine dispersal kernel options
+Here on the left we see a negative exponential distribution, which defines the dispersal kernel as decaying in
+an exponential fashion. In other words, like likelihood of successful dispersal declines exponentially with distance between sites.
+On the right is a beta distribution, which provides a slightly different definition for dispersal kernel.
+Instead, the probability of successful dispersal is low at short distances between sites, then rapidly increases for intermediate
+distances, and then declines again.
+```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4}
+par(mfrow=c(1,2))
+wander_kernel(kernel = "neg_exp")
+wander_kernel(kernel = "beta")
+```
+Here we can see the effects that changes in the kernel parameters have on the shape of the kernel
+```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4}
+par(mfrow=c(1,3))
+wander_kernel(kernel = "neg_exp", t = 0.1)
+wander_kernel(kernel = "neg_exp", t = 0.5)
+wander_kernel(kernel = "neg_exp", t = 0.9)
+```
 
+## Run the connectivity models
 ```{r}
-coral.connect <- connect(coral, zanzibar, maxdist = 30000)
-plot(coral.connect)
+conmod <- connect(habitats = coral, destinations = zanzibar, maxdist = 50000)
+plot(conmod)
 ```
 

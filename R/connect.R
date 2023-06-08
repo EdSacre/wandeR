@@ -8,6 +8,8 @@
 #' @param destinations A raster of the land or seascape. Values of 0 or NA are considered "barriers".
 #'     Values greater than 0 are considered valid locations to travel through.
 #' @param maxdist The maximum dispersal distance of the species in map units.
+#' @param t Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
+#'     with values closer to 0 giving a steeper decline. Values above 1 give an essentially linear distribution. Default value is 0.2.
 #' @param nthreads Specify the number of threads to use.
 #'
 #' @return A spatial raster of connectivity.
@@ -15,7 +17,23 @@
 #' @importFrom foreach "%dopar%"
 #' @importFrom utils "globalVariables"
 
-connect <- function(habitats, destinations, maxdist, nthreads = 1) {
+connect <- function(habitats, destinations, maxdist, t = 0.2, nthreads = 1) {
+
+  # Define connectivity function to be parallelized
+  connect_helper <- function(nhab, ndest, trans, hpoint, dpoint, maxdist, a) {
+    base <- c(1:ndest) * 0
+    for(i in 1:nhab){
+      cd <- gdistance::costDistance(trans, hpoint[i,], dpoint)
+      cd <- cd[1,]
+      cd[cd > maxdist] <- NA
+      cd[is.na(cd) == FALSE] <- exp(-a*(cd[is.na(cd) == FALSE]))
+      cd[is.na(cd) == TRUE] <- 0
+      #cd <- cd * speco[i,]$habvalue # Add this line to give higher connectivity values to higher habitat quality/coverage
+      base <- base+cd
+    }
+    return(base)
+  }
+
   # Enable parallel processing
   clust <- parallel::makeCluster(nthreads, type = "PSOCK")
   doParallel::registerDoParallel(cl = clust)
@@ -26,8 +44,7 @@ connect <- function(habitats, destinations, maxdist, nthreads = 1) {
   destinations[destinations == 0] <- NA
 
   # Define the dispersal kernel
-  d <- maxdist * 0.3 # This defines how steep the dispersal kernel is - a value of 1 is almost linear
-  a <- 1/d # this specifies that the dispersal kernel should taper towards 0 around the max dist
+  a <- 1/(maxdist * t)
 
   # Create the transition layer from "gdistance" package and convert rasters to point
   trans <- gdistance::transition(destinations, transitionFunction = min, directions = 8) # Transition file
@@ -41,9 +58,9 @@ connect <- function(habitats, destinations, maxdist, nthreads = 1) {
   blocks <- seq(from = 0, to = nhab, length.out = nthreads+1)
   blocks <- round(blocks)
 
-  pfcd <- foreach::foreach(p=1:nthreads, .combine = '+', .packages="foreach") %dopar% {
-    k <- (blocks[p]+1):blocks[p+1]
-    connect.helper(nhab = length(k),
+  pfcd <- foreach::foreach(i=1:nthreads, .combine = '+', .packages=c("foreach")) %dopar% {
+    k <- (blocks[i]+1):blocks[i+1]
+    connect_helper(nhab = length(k),
                     ndest = ndest,
                     hpoint = hpoint[k,],
                     dpoint = dpoint,
@@ -60,4 +77,4 @@ connect <- function(habitats, destinations, maxdist, nthreads = 1) {
   return(ras)
 }
 
-if(getRversion() >= "2.15.1")  utils::globalVariables("p")
+if(getRversion() >= "2.15.1")  utils::globalVariables("i")
