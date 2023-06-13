@@ -2,20 +2,22 @@
 #'
 #' @description Generates a connectivity raster based on species habitat locations.
 #'     The connectivity model determines connectivity based on least cost paths, and
-#'     obstacles to movement (e.g. land)
+#'     obstacles to movement (e.g. land).
 #'
 #' @param habitats A raster of species habitats or known locations.
 #' @param surface A raster of the land or seascape. Values of 0 or NA are considered "barriers".
 #'     Values greater than 0 are considered valid locations to travel through.
 #' @param maxdist The maximum dispersal distance of the species in map units.
+#' @param breadth The breadth of the deviation from the dispersal (least cost) path.
 #' @param nthreads Specify the number of threads to use.
 #'
 #' @return A spatial raster of connectivity.
 #' @export
 #' @importFrom foreach "%dopar%"
 #' @importFrom utils "globalVariables"
+#' @importFrom methods "as"
 
-highway <- function(habitats, surface, maxdist, nthreads = 1){
+highway <- function(habitats, surface, maxdist, breadth, nthreads = 1){
 
   # Define the helper function to be parallelized
   highway_helper <- function(i, hpoint, maxdist, trans, surface, path_buffer){
@@ -32,7 +34,7 @@ highway <- function(habitats, surface, maxdist, nthreads = 1){
         terra::vect(type="lines") |>
         terra::rasterize(y = terra::rast(surface), field = 1) |>
         terra::as.points() |>
-        as("Spatial")
+        methods::as("Spatial")
       s <- gdistance::accCost(trans, s)
       s[s > path_buffer] <- NA
       s <- path_buffer - s
@@ -51,8 +53,9 @@ highway <- function(habitats, surface, maxdist, nthreads = 1){
   habitats[habitats == 0] <- NA
   surface[surface == 0] <- NA
 
-  # Define the buffer around leas cost paths
-  path_buffer <- maxdist/20
+  # Define the buffer around least cost paths
+  path_buffer <- (maxdist*breadth)/80 # 80 here is a constant that dictates how wide the paths are in general
+  if(path_buffer < max(res(habitats))){path_buffer <- max(res(habitats))}
 
   # Create the transition layer from "gdistance" package and convert rasters to point
   trans <- gdistance::transition(surface, transitionFunction = min, directions = 8) # Transition file
@@ -60,7 +63,7 @@ highway <- function(habitats, surface, maxdist, nthreads = 1){
   hpoint <- raster::rasterToPoints(habitats, spatial = TRUE) # Set the origin points
   dpoint <- raster::rasterToPoints(surface, spatial = TRUE) # Set the destination points
 
-  fbase <- foreach(i = 1:length(hpoint), .combine = "+", .packages = c("gdistance", "terra", "raster")) %dopar% {
+  fbase <- foreach::foreach(i = 1:length(hpoint), .combine = "+", .packages = c("gdistance", "terra", "raster")) %dopar% {
     highway_helper(i, hpoint, maxdist, trans, surface, path_buffer)
   }
   parallel::stopCluster(cl = clust) # Stop cluster

@@ -5,7 +5,7 @@
 #'     obstacles to movement (e.g. land), and habitat quality.
 #'
 #' @param habitats A raster of species habitats or known locations.
-#' @param destinations A raster of the land or seascape. Values of 0 or NA are considered "barriers".
+#' @param surface A raster of the land or seascape. Values of 0 or NA are considered "barriers".
 #'     Values greater than 0 are considered valid locations to travel through.
 #' @param maxdist The maximum dispersal distance of the species in map units.
 #' @param t Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
@@ -17,7 +17,7 @@
 #' @importFrom foreach "%dopar%"
 #' @importFrom utils "globalVariables"
 
-connect <- function(habitats, destinations, maxdist, t = 0.2, nthreads = 1) {
+connect <- function(habitats, surface, maxdist, t = 0.2, nthreads = 1) {
 
   # Define connectivity function to be parallelized
   connect_helper <- function(nhab, ndest, trans, hpoint, dpoint, maxdist, a) {
@@ -41,16 +41,16 @@ connect <- function(habitats, destinations, maxdist, t = 0.2, nthreads = 1) {
 
   # Checks
   habitats[habitats == 0] <- NA
-  destinations[destinations == 0] <- NA
+  surface[surface == 0] <- NA
 
   # Define the dispersal kernel
   a <- 1/(maxdist * t)
 
   # Create the transition layer from "gdistance" package and convert rasters to point
-  trans <- gdistance::transition(destinations, transitionFunction = min, directions = 8) # Transition file
+  trans <- gdistance::transition(surface, transitionFunction = min, directions = 8) # Transition file
   trans <- gdistance::geoCorrection(trans, type = "c") # Geo-correct transition file
   hpoint <- raster::rasterToPoints(habitats, spatial = TRUE) # Set the origin points
-  dpoint <- raster::rasterToPoints(destinations, spatial = TRUE) # Set the destination points
+  dpoint <- raster::rasterToPoints(surface, spatial = TRUE) # Set the destination points
 
   nhab <- length(hpoint)
   ndest <- length(dpoint)
@@ -72,7 +72,7 @@ connect <- function(habitats, destinations, maxdist, t = 0.2, nthreads = 1) {
   parallel::stopCluster(cl = clust) # Stop cluster
 
   # Send outputs to raster
-  ras <- destinations
+  ras <- surface
   ras[is.na(ras) == F] <- pfcd
   return(ras)
 }
