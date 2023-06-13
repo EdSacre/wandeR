@@ -1,5 +1,5 @@
 # wandeR
-WARNING: This package is under developments and it is not reccomended that it is used at this stage.
+WARNING: This package is under development and it is not reccomended that it is used at this stage.
 ## About the package
 The wandeR package is an R package for spatial modelling, particularly in the context of connectivity or dispersal activities (e.g. the movement of animals, people, fishing boats, cars, etc.).
 
