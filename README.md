@@ -73,6 +73,7 @@ coral_point <- raster::rasterToPoints(coral_subset, spatial = TRUE)
 plot(highmod, axes = FALSE)
 plot(coral_point, pch = 19, cex = 0.5, add = TRUE)
 ```
+![Alt text](inst/images/highway.JPG)
 
 ### Usage
 
