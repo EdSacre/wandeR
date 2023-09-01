@@ -17,7 +17,7 @@
 #' @importFrom utils "globalVariables"
 #' @importFrom methods "as"
 
-highway <- function(habitats, surface, maxdist, breadth, nthreads = 1){
+highway <- function(habitats, surface, maxdist, breadth = 2, nthreads = 1){
 
   # Define the helper function to be parallelized
   highway_helper <- function(i, hpoint, maxdist, trans, surface, path_buffer){
