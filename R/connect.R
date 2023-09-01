@@ -10,7 +10,7 @@
 #' @param maxdist The maximum dispersal distance of the species in map units.
 #' @param t Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
 #'     with values closer to 0 giving a steeper decline. Values above 1 give an essentially linear distribution. Default value is 0.2.
-#' @param nthreads Specify the number of threads to use.
+#' @param nthreads Specify the number of threads to use. Default value is 1.
 #'
 #' @return A spatial raster of connectivity.
 #' @export
@@ -29,6 +29,7 @@ connect <- function(habitats, surface, maxdist, t = 0.2, nthreads = 1) {
       cd[is.na(cd) == FALSE] <- exp(-a*(cd[is.na(cd) == FALSE]))
       cd[is.na(cd) == TRUE] <- 0
       #cd <- cd * speco[i,]$habvalue # Add this line to give higher connectivity values to higher habitat quality/coverage
+      cd <- cd * hpoint@data[[1]][i] # Add this line to give higher connectivity values to higher habitat quality/coverage
       base <- base+cd
     }
     return(base)
