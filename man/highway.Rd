@@ -4,10 +4,10 @@
 \alias{highway}
 \title{highway}
 \usage{
-highway(habitats, surface, maxdist, breadth, nthreads = 1)
+highway(habitats, surface, maxdist, breadth = 2, nthreads = 1)
 }
 \arguments{
-\item{habitats}{A raster of species habitats or known locations.}
+\item{habitats}{A raster(RasterLayer) of species habitats or known locations.}
 
 \item{surface}{A raster of the land or seascape. Values of 0 or NA are considered "barriers".
 Values greater than 0 are considered valid locations to travel through.}

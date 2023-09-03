@@ -4,7 +4,7 @@
 #'     The connectivity model determines connectivity based on least cost paths, and
 #'     obstacles to movement (e.g. land).
 #'
-#' @param habitats A raster of species habitats or known locations.
+#' @param habitats A raster(RasterLayer) of species habitats or known locations.
 #' @param surface A raster of the land or seascape. Values of 0 or NA are considered "barriers".
 #'     Values greater than 0 are considered valid locations to travel through.
 #' @param maxdist The maximum dispersal distance of the species in map units.
@@ -55,7 +55,7 @@ highway <- function(habitats, surface, maxdist, breadth = 2, nthreads = 1){
 
   # Define the buffer around least cost paths
   path_buffer <- (maxdist*breadth)/80 # 80 here is a constant that dictates how wide the paths are in general
-  if(path_buffer < max(res(habitats))){path_buffer <- max(res(habitats))}
+  if(path_buffer < max(raster::res(habitats))){path_buffer <- max(raster::res(habitats))}
 
   # Create the transition layer from "gdistance" package and convert rasters to point
   trans <- gdistance::transition(surface, transitionFunction = min, directions = 8) # Transition file

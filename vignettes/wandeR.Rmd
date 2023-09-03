@@ -61,6 +61,7 @@ and, therefore, likely serve as a "hub" or connectivity hotspot.
 conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, nthreads = 1)
 plot(conmod, axes = FALSE)
 ```
+
 Now we will run the "highway" connectivity, which models highways or corridors 
 through which species are predicted to most often travel. This model can take a
 long time to calculate, so we will use a subset of the coral data with only a few
