@@ -8,7 +8,13 @@ Description: Provides functions for connectivity modelling.
     The connectivity models are based on graph theory, and model the movement
     of species through space according to a dispersal kernel, least cost paths,
     and spatial barriers (e.g. land for marine species, or roads for terrestrial
-    species).
+    species). Functions are provided for using a degree centrality approach,
+    but without the requirement of defining discrete habitat patches. These 
+    functions can also include measures of habitat suitability, quality, 
+    coverage, or any other intensity or abundance type measure. Functions
+    are also provided for corridor mapping. These functions were designed for 
+    the modelling of species connectivity, but, of course, have many uses 
+    outside of ecology, such as in mapping the movements of people or diseases.
 License: GPL-3
 URL: https://github.com/EdSacre/wandeR
 Encoding: UTF-8
