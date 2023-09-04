@@ -1,35 +1,37 @@
-Package: wandeR
 Type: Package
+Package: wandeR
 Title: Spatial Tools for Connectivity and Corridor Mapping
 Version: 0.1.0
 Author: Edmond Sacre
 Maintainer: Edmond Sacre <edmond.sacre@slu.se>
-Description: Provides functions for connectivity modelling.
-    The connectivity models are based on graph theory, and model the movement
-    of species through space according to a dispersal kernel, least cost paths,
-    and spatial barriers (e.g. land for marine species, or roads for terrestrial
-    species). Functions are provided for using a degree centrality approach,
-    but without the requirement of defining discrete habitat patches. These 
-    functions can also include measures of habitat suitability, quality, 
-    coverage, or any other intensity or abundance type measure. Functions
-    are also provided for corridor mapping. These functions were designed for 
-    the modelling of species connectivity, but, of course, have many uses 
-    outside of ecology, such as in mapping the movements of people or diseases.
+Description: Provides functions for connectivity modelling.  The
+    connectivity models are based on graph theory, and model the movement
+    of species through space according to a dispersal kernel, least cost
+    paths, and spatial barriers (e.g. land for marine species, or roads
+    for terrestrial species). Functions are provided for using a degree
+    centrality approach, but without the requirement of defining discrete
+    habitat patches. These functions can also include measures of habitat
+    suitability, quality, coverage, or any other intensity or abundance
+    type measure. Functions are also provided for corridor mapping. These
+    functions were designed for the modelling of species connectivity,
+    but, of course, have many uses outside of ecology, such as in mapping
+    the movements of people or diseases.
 License: GPL-3
 URL: https://github.com/EdSacre/wandeR
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.15)
 Imports:
-    raster (>= 3.6.20),
-    gdistance (>= 1.6.2),
     doParallel (>= 1.0.17),
     foreach (>= 1.5.2),
-    terra (>= 1.7.29),
-    methods (>= 2.15)
+    gdistance (>= 1.6.2),
+    methods (>= 2.15),
+    raster (>= 3.6.20),
+    terra (>= 1.7.29)
 Suggests: 
     knitr,
     rmarkdown
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
