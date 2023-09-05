@@ -13,12 +13,16 @@ wander_kernel(
 )
 }
 \arguments{
-\item{maxdist}{The maximum dispersal distance of the species (units are not relevant). Default is 10,000.}
+\item{maxdist}{The maximum dispersal distance of the species. Default is
+10,000.}
 
-\item{kernel}{The dispersal kernel distribution. Options are 'neg_exp' or 'beta'. Default is 'neg_exp'.}
+\item{kernel}{The dispersal kernel distribution. Options are 'neg_exp' or
+'beta'. Default is 'neg_exp'.}
 
-\item{t}{Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
-with values closer to 0 giving a steeper decline. Values above 1 give an essentially linear distribution. Default value is 0.2.}
+\item{t}{Parameter for the negative exponential kernel. Values between 0
+and 1 give a normal exponential decay kernel, with values closer to 0
+giving a steeper decline. Values above 1 give an essentially linear
+distribution. Default value is 0.2.}
 
 \item{a}{Parameter for the beta distribution kernel. Default value is 2.}
 
@@ -29,7 +33,8 @@ A plot of specified dispersal kernels.
 }
 \description{
 Generates plots of different dispersal kernels that
-    can be implemented in the 'connect' function. There are two dispersal kernel options,
-    a negative exponential (default) or a beta distribution. Test different parameter values
-    to inform what values are chosen for the connectivity modelling.
+    can be implemented in the 'connect' function. There are two dispersal+
+    kernel options, a negative exponential (default) or a beta distribution.
+    Test different parameter values to inform what values are chosen for the
+    connectivity modelling.
 }

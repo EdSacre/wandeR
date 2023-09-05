@@ -9,13 +9,16 @@ connect(habitats, surface, maxdist, t = 0.2, nthreads = 1)
 \arguments{
 \item{habitats}{A raster(RasterLayer) of species habitats or known locations.}
 
-\item{surface}{A raster(RasterLayer) of the land or seascape. Values of 0 or NA are considered "barriers".
-Values greater than 0 are considered valid locations to travel through.}
+\item{surface}{A raster(RasterLayer) of the land or seascape. Values of 0 or
+NA are considered "barriers". Values greater than 0 are considered valid
+locations to travel through.}
 
 \item{maxdist}{The maximum dispersal distance of the species in map units.}
 
-\item{t}{Parameter for the negative exponential kernel. Values between 0 and 1 give a normal exponential decay kernel,
-with values closer to 0 giving a steeper decline. Values above 1 give an essentially linear distribution. Default value is 0.2.}
+\item{t}{Parameter for the negative exponential kernel. Values between 0 and
+1 give a normal exponential decay kernel, with values closer to 0 giving
+a steeper decline. Values above 1 give an essentially linear
+distribution. Default value is 0.2.}
 
 \item{nthreads}{Specify the number of threads to use. Default value is 1.}
 }
@@ -23,7 +26,7 @@ with values closer to 0 giving a steeper decline. Values above 1 give an essenti
 A spatial raster of connectivity.
 }
 \description{
-Generates a connectivity raster based on species habitat locations.
-    The connectivity model determines connectivity based on a dispersal kernel,
-    obstacles to movement (e.g. land), and habitat quality.
+Generates a connectivity raster based on species habitat
+    locations. The connectivity model determines connectivity based on a
+    dispersal kernel, obstacles to movement (e.g. land), and habitat quality.
 }

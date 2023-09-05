@@ -9,12 +9,14 @@ highway(habitats, surface, maxdist, breadth = 2, nthreads = 1)
 \arguments{
 \item{habitats}{A raster(RasterLayer) of species habitats or known locations.}
 
-\item{surface}{A raster of the land or seascape. Values of 0 or NA are considered "barriers".
-Values greater than 0 are considered valid locations to travel through.}
+\item{surface}{A raster of the land or seascape. Values of 0 or NA are
+considered "barriers". Values greater than 0 are considered valid
+locations to travel through.}
 
 \item{maxdist}{The maximum dispersal distance of the species in map units.}
 
-\item{breadth}{The breadth of the deviation from the dispersal (least cost) path.}
+\item{breadth}{The breadth of the deviation from the dispersal (least cost)
+path.}
 
 \item{nthreads}{Specify the number of threads to use.}
 }
@@ -22,7 +24,7 @@ Values greater than 0 are considered valid locations to travel through.}
 A spatial raster of connectivity.
 }
 \description{
-Generates a connectivity raster based on species habitat locations.
-    The connectivity model determines connectivity based on least cost paths, and
-    obstacles to movement (e.g. land).
+Generates a connectivity raster based on species habitat
+    locations. The connectivity model determines connectivity based on least
+    cost paths, and obstacles to movement (e.g. land).
 }

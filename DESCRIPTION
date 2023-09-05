@@ -29,9 +29,11 @@ Imports:
     terra (>= 1.7.29)
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+Config/testthat/edition: 3

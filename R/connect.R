@@ -22,6 +22,8 @@
 
 connect <- function(habitats, surface, maxdist, t = 0.2, nthreads = 1) {
 
+  # Checks
+
   # Define connectivity function to be parallelized
   connect_helper <- function(nhab, ndest, trans, hpoint, dpoint, maxdist, a) {
     base <- c(1:ndest) * 0
