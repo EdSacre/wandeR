@@ -56,24 +56,5 @@ plot(conmod, axes = FALSE)
 ```
 ![Alt text](inst/images/connect.JPG)
 
-Now we will run the "highway" connectivity, which models highways or corridors 
-through which species are predicted to most often travel. This model can take a
-long time to calculate, so we will use a subset of the coral data with only a few
-habitat cells.
-```{r, out.width="400px", out.height="400px", fig.width=7, fig.height=7, fig.align = 'center'}
-coral_subset <- wander_data("coral_subset")
-plot(coral_subset, axes = FALSE)
-```
-
-Now, let's run the highway model.
-```{r, out.width="400px", out.height="400px", fig.width=7, fig.height=7, fig.align = 'center'}
-highmod <- highway(habitats = coral_subset, surface = zanzibar, maxdist = 200000, nthreads = 1)
-coral_subset[coral_subset == 0] <- NA 
-coral_point <- raster::rasterToPoints(coral_subset, spatial = TRUE)
-plot(highmod, axes = FALSE)
-plot(coral_point, pch = 19, cex = 0.5, add = TRUE)
-```
-![Alt text](inst/images/highway.JPG)
-
 ### Usage
 
