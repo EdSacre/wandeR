@@ -6,8 +6,8 @@
 #'
 #' @return A raster.
 #' @export
-#' @importFrom raster "raster"
+#' @importFrom terra "rast"
 
 wander_data <- function(name){
-  raster(system.file("extdata", paste0(name, ".tif"), package = "wandeR"))
+  terra::rast(system.file("extdata", paste0(name, ".tif"), package = "wandeR"))
 }
