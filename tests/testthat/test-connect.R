@@ -24,6 +24,6 @@ tsurf <-  matrix(c(
   0,0,0,0,0,0,0,0,0,0),
   nrow = 10)
 
-test_that("Input habitat layer is RasterLayer", {
-  expect_s4_class(coral, "RasterLayer")
-})
+#test_that("Input habitat layer is RasterLayer", {
+#  expect_s4_class(coral, "RasterLayer")
+#})

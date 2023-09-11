@@ -69,9 +69,6 @@ connect <- function(habitats, surface, maxdist, kernel = c("neg_exp", "beta"),
   symax <- terra::ymax(surface) # Store ymax
   svals <- terra::values(surface) # Store surface values
 
-  # Define the dispersal kernel
-  #h <- 1 / (maxdist * t)
-
   # Define blocks for parallel processing
   blocks <- seq(from = 0, to = nhab, length.out = nthreads + 1)
   blocks <- round(blocks)
@@ -113,7 +110,6 @@ connect <- function(habitats, surface, maxdist, kernel = c("neg_exp", "beta"),
       nhab = length(k),
       nsurf = nsurf,
       maxdist = maxdist,
-      h = h,
       ind = ind[k]
     )
   }

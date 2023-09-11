@@ -1,6 +1,6 @@
 Type: Package
 Package: wandeR
-Title: Spatial Tools for Connectivity Mapping
+Title: Spatial Tools for Connectivity Modeling
 Version: 0.1.1
 Author: Edmond Sacre
 Maintainer: Edmond Sacre <edmond.sacre@slu.se>
