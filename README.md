@@ -33,7 +33,7 @@ library(terra)
 ### Import some testing dataset
 The coral raster shows coral habitat around Zanzibar and Pemba Island.
 The zanzibar raster show all ocean areas around Zanzibar.
-We want to model the connectivity of corals in the area, assuming the can only
+We want to model the connectivity of corals in the area, assuming they can only
 disperse through these ocean areas.
 ```{r}
 coral <- wander_data("coral")
