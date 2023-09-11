@@ -1,5 +1,10 @@
 # wandeR
 WARNING: This package is under development and it is not reccomended that it is used at this stage.
+
+## Citation
+Sacre, E. (2023) wandeR: Spatial Tools for Connectivity Modeling (version 0.1.1). 
+Available at: https://github.com/EdSacre/wandeR
+
 ## About the package
 The wandeR package is an R package for spatial modelling, particularly in the context of connectivity or dispersal activities (e.g. the movement of animals, people, fishing boats, cars, etc.).
 
