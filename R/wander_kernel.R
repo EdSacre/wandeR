@@ -14,7 +14,7 @@
 #'     and 1 give a normal exponential decay kernel, with values closer to 0
 #'     giving a steeper decline. Values above 1 give an essentially linear
 #'     distribution. Default value is 0.2.
-#' @param a Parameter for the beta distribution kernel. Default value is 2.
+#' @param a Parameter for the beta distribution kernel. Default value is 3.
 #' @param b Parameter for the beta distribution kernel. Default value is 7.
 #'
 #' @return A plot of specified dispersal kernels.
@@ -27,11 +27,11 @@ wander_kernel <- function(maxdist = 10000, kernel = c("neg_exp", "beta"), t = NU
 
   # Throw warnings if chosen distributions do not match chosen parameters
   if (kernel == "neg_exp" & !is.null(a) | !is.null(b)) {
-    warning("A negative exponential distribution was specified, as well as 'a'
+    stop("A negative exponential distribution was specified, as well as 'a'
             and 'b' parameters. Did you mean to choose a beta distribution?")
   }
   if (kernel == "beta" & !is.null(t)) {
-    warning("A beta distribution was specified, as well as the 't' parameter.
+    stop("A beta distribution was specified, as well as the 't' parameter.
             Did you mean to choose a negative exponential distribution?")
   }
 
@@ -41,8 +41,8 @@ wander_kernel <- function(maxdist = 10000, kernel = c("neg_exp", "beta"), t = NU
       t <- 0.2
     }
     rng <- 1:maxdist
-    a <- 1 / (maxdist * t)
-    y <- exp(-a * rng)
+    h <- 1 / (maxdist * t)
+    y <- exp(-h * rng)
     plot(rng, y,
       main = " Negative exponential kernel",
       xlab = "Distance",
@@ -54,7 +54,7 @@ wander_kernel <- function(maxdist = 10000, kernel = c("neg_exp", "beta"), t = NU
   # Beta distribution kernel
   if (kernel == "beta") {
     if (is.null(a)) {
-      a <- 2
+      a <- 3
     }
     if (is.null(b)) {
       b <- 7

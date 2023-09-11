@@ -24,7 +24,7 @@ and 1 give a normal exponential decay kernel, with values closer to 0
 giving a steeper decline. Values above 1 give an essentially linear
 distribution. Default value is 0.2.}
 
-\item{a}{Parameter for the beta distribution kernel. Default value is 2.}
+\item{a}{Parameter for the beta distribution kernel. Default value is 3.}
 
 \item{b}{Parameter for the beta distribution kernel. Default value is 7.}
 }

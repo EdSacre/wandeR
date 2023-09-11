@@ -23,7 +23,9 @@ Imports:
     doParallel (>= 1.0.17),
     foreach (>= 1.5.2),
     methods (>= 2.15),
-    terra (>= 1.7.29)
+    terra (>= 1.7.29),
+    gdistance (>= 1.6.2),
+    raster (>= 3.6.20)
 Suggests: 
     knitr,
     rmarkdown,

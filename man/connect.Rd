@@ -4,7 +4,16 @@
 \alias{connect}
 \title{connect}
 \usage{
-connect(habitats, surface, maxdist, t = 0.2, nthreads = 1)
+connect(
+  habitats,
+  surface,
+  maxdist,
+  kernel = c("neg_exp", "beta"),
+  t = NULL,
+  a = NULL,
+  b = NULL,
+  nthreads = 1
+)
 }
 \arguments{
 \item{habitats}{A raster(RasterLayer) of species habitats or known locations.}
@@ -15,10 +24,17 @@ locations to travel through.}
 
 \item{maxdist}{The maximum dispersal distance of the species in map units.}
 
-\item{t}{Parameter for the negative exponential kernel. Values between 0 and
-1 give a normal exponential decay kernel, with values closer to 0 giving
-a steeper decline. Values above 1 give an essentially linear
+\item{kernel}{The dispersal kernel distribution. Options are 'neg_exp' or
+'beta'. Default is 'neg_exp'.}
+
+\item{t}{Parameter for the negative exponential kernel. Values between 0
+and 1 give a normal exponential decay kernel, with values closer to 0
+giving a steeper decline. Values above 1 give an essentially linear
 distribution. Default value is 0.2.}
+
+\item{a}{Parameter for the beta distribution kernel. Default value is 3.}
+
+\item{b}{Parameter for the beta distribution kernel. Default value is 7.}
 
 \item{nthreads}{Specify the number of threads to use. Default value is 1.}
 }
