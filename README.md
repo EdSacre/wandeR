@@ -6,7 +6,17 @@ Sacre, E. (2023) wandeR: Spatial Tools for Connectivity Modeling (version 0.1.1)
 Available at: https://github.com/EdSacre/wandeR
 
 ## About the package
-The wandeR package is an R package for spatial modelling, particularly in the context of connectivity or dispersal activities (e.g. the movement of animals, people, fishing boats, cars, etc.).
+Provides functions for connectivity modelling and kernel density
+mapping. The connectivity models are based on graph theory, and model the 
+movement of species through space according to a dispersal kernel, least 
+cost paths, and spatial barriers (e.g. land for marine species, or roads
+for terrestrial species). Functions are provided for using a degree
+centrality approach, but without the requirement of defining discrete
+habitat patches. These functions can also include measures of habitat
+suitability, quality, coverage, or any other intensity or abundance
+type measure.These functions were designed for the modelling of species 
+connectivity, but, of course, have many uses outside of ecology, such as in 
+mapping the movements of people or diseases.
 
 ## Installation
 ``` r
