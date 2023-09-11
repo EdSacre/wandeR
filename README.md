@@ -40,6 +40,7 @@ coral <- wander_data("coral")
 zanzibar <- wander_data("zanzibar")
 terra::plot(c(coral, zanzibar), axes = FALSE)
 ```
+![Alt text](inst/images/coral.jpg)
 
 ### Examine dispersal kernel options
 Here on the left we see a negative exponential distribution, which defines the dispersal kernel as decaying in
@@ -52,6 +53,7 @@ par(mfrow=c(1,2))
 wander_kernel(kernel = "neg_exp")
 wander_kernel(kernel = "beta")
 ```
+![Alt text](inst/images/kernel1.jpg)
 
 Here we can see the effects that changes in the kernel parameters have on the shape of the kernel
 ```{r}
@@ -60,6 +62,7 @@ wander_kernel(kernel = "neg_exp", t = 0.1)
 wander_kernel(kernel = "neg_exp", t = 0.5)
 wander_kernel(kernel = "neg_exp", t = 0.9)
 ```
+![Alt text](inst/images/kernel2.jpg)
 
 ### Run the connectivity models
 This model calculates the connectivity of each cell to the coral habitats. 
@@ -97,6 +100,7 @@ habitat cells.
 coral_subset <- wander_data("coral_subset")
 terra::plot(coral_subset, axes = FALSE)
 ```
+![Alt text](inst/images/highway1.jpg)
 
 Now, let's run the highway model.
 ```{r}
@@ -106,6 +110,5 @@ coral_point <- terra::as.points(coral_subset)
 terra::plot(highmod, axes = FALSE)
 terra::plot(coral_point, add = TRUE)
 ```
-
-### Usage
+![Alt text](inst/images/highway2.jpg)
 
