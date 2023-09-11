@@ -45,7 +45,7 @@ terra::plot(c(coral, zanzibar), axes = FALSE)
 ### Examine dispersal kernel options
 Here on the left we see a negative exponential distribution, which defines the dispersal kernel as decaying in
 an exponential fashion. In other words, like likelihood of successful dispersal declines exponentially with distance between sites.
-On the right is a beta distribution, which provides a slightly different definition for dispersal kernel.
+On the right is a beta distribution, which provides a slightly different definition for the dispersal kernel.
 Instead, the probability of successful dispersal is low at short distances between sites, then rapidly increases for intermediate
 distances, and then declines again.
 ```{r}
