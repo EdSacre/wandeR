@@ -12,7 +12,7 @@ devtools::install_github("EdSacre/wandeR")
 ### Load packages
 ```{r}
 library(wandeR)
-library(raster)
+library(terra)
 ```
 
 ### Import some testing dataset
@@ -20,10 +20,10 @@ The coral raster shows coral habitat around Zanzibar and Pemba Island.
 The zanzibar raster show all ocean areas around Zanzibar.
 We want to model the connectivity of corals in the area, assuming the can only
 disperse through these ocean areas.
-```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4, fig.align = 'center'}
+```{r}
 coral <- wander_data("coral")
 zanzibar <- wander_data("zanzibar")
-plot(stack(coral, zanzibar), axes = FALSE)
+terra::plot(c(coral, zanzibar), axes = FALSE)
 ```
 
 ### Examine dispersal kernel options
@@ -32,14 +32,14 @@ an exponential fashion. In other words, like likelihood of successful dispersal 
 On the right is a beta distribution, which provides a slightly different definition for dispersal kernel.
 Instead, the probability of successful dispersal is low at short distances between sites, then rapidly increases for intermediate
 distances, and then declines again.
-```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4}
+```{r}
 par(mfrow=c(1,2))
 wander_kernel(kernel = "neg_exp")
 wander_kernel(kernel = "beta")
 ```
 
 Here we can see the effects that changes in the kernel parameters have on the shape of the kernel
-```{r, out.width="680px", out.height="300px", fig.width=10, fig.height=4}
+```{r}
 par(mfrow=c(1,3))
 wander_kernel(kernel = "neg_exp", t = 0.1)
 wander_kernel(kernel = "neg_exp", t = 0.5)
@@ -49,12 +49,48 @@ wander_kernel(kernel = "neg_exp", t = 0.9)
 ### Run the connectivity models
 This model calculates the connectivity of each cell to the coral habitats. 
 Cells with a high value are highly connected to many coral reef habitats,
-and, therefore, likely serve as a "hub" or connectivity hotspot.
-```{r, out.width="400px", out.height="400px", fig.width=7, fig.height=7, fig.align = 'center'}
-conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, nthreads = 1)
-plot(conmod, axes = FALSE)
+and, therefore, likely serve as a "hub" or connectivity hotspot. Here we use the
+default negative exponential dispersal kernel.
+```{r}
+conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "neg_exp")
+par(mfrow=c(1,2))
+wander_kernel(kernel = "neg_exp")
+terra::plot(conmod, axes = FALSE)
 ```
-![Alt text](inst/images/connect.JPG)
+![Alt text](inst/images/connect1.jpg)
+
+Now let's try running the connectivity model using the beta distribution. This 
+is useful for modelling different kinds of movements. For example, let's imagine
+that that coral pixels actually represent fishing boats. We might expect fishers
+to avoid locations close to harbours, where there is high competition for 
+resources. Instead, we might expect them to fish preferentially according to a
+beta distribution.
+```{r}
+conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "beta")
+par(mfrow=c(1,2))
+wander_kernel(kernel = "beta")
+terra::plot(conmod, axes = FALSE)
+```
+![Alt text](inst/images/connect2.jpg)
+
+### The highway/corridor connectivity model
+Now we will run the "highway" connectivity model, which models highways or corridors 
+through which species are predicted to most often travel. This model can take a
+long time to calculate, so we will use a subset of the coral data with only a few
+habitat cells.
+```{r}
+coral_subset <- wander_data("coral_subset")
+terra::plot(coral_subset, axes = FALSE)
+```
+
+Now, let's run the highway model.
+```{r}
+highmod <- highway(habitats = coral_subset, surface = zanzibar, maxdist = 200000, nthreads = 1)
+coral_subset[coral_subset == 0] <- NA
+coral_point <- terra::as.points(coral_subset)
+terra::plot(highmod, axes = FALSE)
+terra::plot(coral_point, add = TRUE)
+```
 
 ### Usage
 
