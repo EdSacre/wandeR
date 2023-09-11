@@ -70,7 +70,7 @@ Cells with a high value are highly connected to many coral reef habitats,
 and, therefore, likely serve as a "hub" or connectivity hotspot. Here we use the
 default negative exponential dispersal kernel.
 ```{r}
-conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "neg_exp")
+conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "neg_exp", nthreads = 1)
 par(mfrow=c(1,2))
 wander_kernel(kernel = "neg_exp")
 terra::plot(conmod, axes = FALSE)
@@ -84,7 +84,7 @@ to avoid locations close to harbours, where there is high competition for
 resources. Instead, we might expect them to fish preferentially according to a
 beta distribution.
 ```{r}
-conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "beta")
+conmod <- connect(habitats = coral, surface = zanzibar, maxdist = 50000, kernel = "beta", nthreads = 1)
 par(mfrow=c(1,2))
 wander_kernel(kernel = "beta")
 terra::plot(conmod, axes = FALSE)
