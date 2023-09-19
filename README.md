@@ -20,6 +20,7 @@ mapping the movements of people or diseases.
 
 ## Installation
 ``` r
+intall.packages("devtools") # If not already installed
 devtools::install_github("EdSacre/wandeR")
 ```
 
