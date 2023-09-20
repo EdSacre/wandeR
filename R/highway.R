@@ -25,6 +25,10 @@ highway <- function(habitats, surface, maxdist, breadth = 2, nthreads = 1) {
   habitats <- raster::raster(habitats)
   surface <- raster::raster(surface)
 
+  # Checks
+  habitats[habitats == 0] <- NA
+  surface[surface == 0] <- NA
+
   # Define the helper function to be parallelized
   highway_helper <- function(i, hpoint, maxdist, trans, surface, path_buffer) {
     cd <- gdistance::costDistance(trans, hpoint[i, ], hpoint)
@@ -60,10 +64,6 @@ highway <- function(habitats, surface, maxdist, breadth = 2, nthreads = 1) {
   doParallel::registerDoParallel(cl = clust)
   foreach::getDoParRegistered()
 
-  # Checks
-  habitats[habitats == 0] <- NA
-  surface[surface == 0] <- NA
-
   # Define the buffer around least cost paths
   path_buffer <- (maxdist * breadth) / 80 # 80 here is a constant that dictates how wide the paths are in general
   if (path_buffer < max(raster::res(habitats))) {
@@ -71,7 +71,7 @@ highway <- function(habitats, surface, maxdist, breadth = 2, nthreads = 1) {
   }
 
   # Create the transition layer from "gdistance" package and convert rasters to point
-  trans <- gdistance::transition(surface, transitionFunction = min, directions = 8) # Transition file
+  trans <- gdistance::transition(surface, transitionFunction = min, directions = 16) # Transition file
   trans <- gdistance::geoCorrection(trans, type = "c") # Geo-correct transition file
   hpoint <- raster::rasterToPoints(habitats, spatial = TRUE) # Set the origin points
   dpoint <- raster::rasterToPoints(surface, spatial = TRUE) # Set the destination points
