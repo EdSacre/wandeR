@@ -106,12 +106,7 @@ connect <- function(habitats, surface, maxdist, kernel = c("neg_exp", "beta"),
   # Perform connect function in parallel
   pfcd <- foreach::foreach(i = 1:nthreads, .combine = "+", .packages = c("foreach")) %dopar% {
     k <- (blocks[i] + 1):blocks[i + 1]
-    connect_helper(
-      nhab = length(k),
-      nsurf = nsurf,
-      maxdist = maxdist,
-      ind = ind[k]
-    )
+    connect_helper(nhab = length(k), nsurf = nsurf, maxdist = maxdist, ind = ind[k])
   }
 
   parallel::stopCluster(cl = clust) # Stop cluster
