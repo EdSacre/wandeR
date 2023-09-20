@@ -74,7 +74,7 @@ connect <- function(habitats, surface, maxdist, kernel = c("neg_exp", "beta"),
   blocks <- round(blocks)
 
   # Define connectivity helper function to be parallelized
-  connect_helper <- function(nhab, nsurf, maxdist, h, ind) {
+  connect_helper <- function(nhab, nsurf, maxdist, ind) {
     base <- c(1:nsurf) * 0
     for (i in 1:nhab) {
       habsurf <- terra::rast(nrows = sr, ncols = sc, crs = scrs, xmin=sxmin, xmax=sxmax, ymin=symin, ymax=symax, vals=svals)
