@@ -29,7 +29,7 @@ connect <- function(habitats, surface, maxdist, kernel = c("neg_exp", "beta"),
 
   # Dispersal kernel checks
   kernel <- match.arg(kernel)
-  if (kernel == "neg_exp" & !is.null(a) | !is.null(b)) {
+  if (kernel == "neg_exp" & (!is.null(a) | !is.null(b))) {
     stop("A negative exponential distribution was specified, as well as 'a'
             and 'b' parameters. Did you mean to choose a beta distribution?")
   }

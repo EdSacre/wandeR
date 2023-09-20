@@ -26,7 +26,7 @@ wander_kernel <- function(maxdist = 10000, kernel = c("neg_exp", "beta"), t = NU
   kernel <- match.arg(kernel)
 
   # Throw warnings if chosen distributions do not match chosen parameters
-  if (kernel == "neg_exp" & !is.null(a) | !is.null(b)) {
+  if (kernel == "neg_exp" & (!is.null(a) | !is.null(b))) {
     stop("A negative exponential distribution was specified, as well as 'a'
             and 'b' parameters. Did you mean to choose a beta distribution?")
   }
