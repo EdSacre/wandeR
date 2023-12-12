@@ -33,7 +33,7 @@ library(terra)
 
 ### Import some testing dataset
 The coral raster shows coral habitat around Zanzibar and Pemba Island.
-The zanzibar raster show all ocean areas in the region.
+The zanzibar raster shows all ocean areas in the region.
 We want to model the connectivity of corals in the area, assuming they can only
 disperse through these ocean areas.
 ```{r}
