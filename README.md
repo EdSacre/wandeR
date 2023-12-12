@@ -14,7 +14,7 @@ for terrestrial species). Functions are provided for using a degree
 centrality approach, but without the requirement of defining discrete
 habitat patches. These functions can also include measures of habitat
 suitability, quality, coverage, or any other intensity or abundance
-type measure.These functions were designed for the modelling of species 
+type measure. These functions were designed for the modelling of species 
 connectivity, but, of course, have many uses outside of ecology, such as in 
 mapping the movements of people or diseases.
 
