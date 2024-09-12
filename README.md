@@ -1,5 +1,4 @@
 # wandeR
-WARNING: This package is under development so you may encounter bugs/errors if attempting to use at this stage.
 
 ## Citation
 Sacre, E. (2023) wandeR: Spatial tools for connectivity modeling (version 0.1.1). 
